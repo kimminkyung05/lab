@@ -217,4 +217,10 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# data
 merged_data.csv
+
+# Experiment outputs
+results_ar_eval_200/
+loss_checkpoints/
+paper_figures/

@@ -4,7 +4,7 @@
 
 ## 실행 방법
 
-`notebooks` 폴더를 작업 디렉터리로 연 뒤, `00_experiment_runner.ipynb`만 처음부터 실행하세요. 이 노트북이 같은 커널에서 아래 파이프라인을 순서대로 실행합니다.
+프로젝트 루트 또는 `notebooks` 폴더에서 `00_experiment_runner.ipynb`만 처음부터 실행하세요. 이 노트북이 같은 커널에서 아래 파이프라인을 순서대로 실행합니다.
 
 1. `01_data_preparation.ipynb` — 데이터 로드, 파일 단위 Train/Validation/Test 분할, 스케일링, 선택적 PCA, 시퀀스와 DataLoader 생성
 2. `02_models_and_losses.ipynb` — RNN 계열, TCN, Transformer 및 loss 함수 정의

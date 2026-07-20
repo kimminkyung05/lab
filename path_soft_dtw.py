@@ -6,7 +6,6 @@ from numba import jit
 
 @jit(nopython = True)
 def my_max(x, gamma):
-    # use the log-sum-exp trick
     max_x = np.max(x)
     exp_x = np.exp((x - max_x) / gamma)
     Z = np.sum(exp_x)
@@ -39,7 +38,6 @@ def dtw_grad(theta, gamma):
 
     for i in range(1, m + 1):
         for j in range(1, n + 1):
-            # theta is indexed starting from 0.
             v, Q[i, j] = my_min(np.array([V[i, j - 1],
                                                 V[i - 1, j - 1],
                                                 V[i - 1, j]]) , gamma)                        
@@ -71,7 +69,6 @@ def dtw_hessian_prod(theta, Z, Q, E, gamma):
     Q_dot = np.zeros((m + 2, n + 2, 3))
     for i in range(1, m + 1):
         for j in range(1, n + 1):
-            # theta is indexed starting from 0.
             V_dot[i, j] = Z[i - 1, j - 1] + \
                           Q[i, j, 0] * V_dot[i, j - 1] + \
                           Q[i, j, 1] * V_dot[i - 1, j - 1] + \

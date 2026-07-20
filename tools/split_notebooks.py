@@ -64,14 +64,11 @@ def experiment_runner_cells() -> list[dict]:
         ),
         code(
             '''RUN_CONFIG = {
-    # 실행할 모델과 loss
     "models": ["LSTM", "Transformer"],
     "loss": "db",  # mse, ep, dilate, tildeq, db, kmbdf, cp
 
-    # 결과 저장 폴더 이름
     "experiment": "lstm_transformer_db",
 
-    # None이면 원본 기본 config 값을 사용합니다.
     "epochs": 1000,
     "batch_size": None,
     "lr": None,
@@ -79,11 +76,9 @@ def experiment_runner_cells() -> list[dict]:
     "input_len": None,
     "output_len": None,
 
-    # 빠른 비교는 False, 파라미터 탐색까지 하려면 True
     "run_optuna": False,
     "optuna_trials": 30,
 
-    # 결과 그래프에 표시할 test sample 번호
     "sample_idx": 0,
 }
 '''
@@ -109,7 +104,6 @@ NOTEBOOK_PATH = ROOT / "lt_db.ipynb"
 with NOTEBOOK_PATH.open(encoding="utf-8") as file:
     source_cells = json.load(file)["cells"]
 
-# 원본 구현을 불러온 후, 위 RUN_CONFIG로 기본 설정을 덮어씁니다.
 namespace = {"__name__": "__main__"}
 for cell_index in (0, 2):
     exec("".join(source_cells[cell_index]["source"]), namespace)
@@ -153,7 +147,6 @@ print(f"모델: {config['model_names']} | loss: {config['loss_type']}")
 print(f"PCA: 누적 설명분산 {config['pca_n_components']:.0%} 이상")
 print("=" * 70)
 
-# 데이터 준비 → 모델/loss 정의 → 학습 → AR 평가
 PIPELINE_CELLS = (4, 5, 6, 7, 9, 10, 11, 12, 13, 15, 16, 18)
 for cell_index in PIPELINE_CELLS:
     source = "".join(source_cells[cell_index]["source"])
@@ -163,7 +156,6 @@ for cell_index in PIPELINE_CELLS:
     )
     exec(source, namespace)
 
-# 선택한 loss의 수식을 출력합니다.
 loss_formulas = {
     "mse": r"\\mathrm{MSE}=\\frac{1}{N}\\sum_{i=1}^{N}(\\hat{y}_i-y_i)^2",
     "ep": r"\\mathcal{L}_{EP}=\\mathrm{MSE}+\\lambda_{peak}\\mathcal{L}_{peak}",
@@ -176,7 +168,6 @@ loss_formulas = {
 display(Markdown(f"### 현재 loss: `{config['loss_type']}`"))
 display(Math(loss_formulas[config["loss_type"]]))
 
-# 지정한 sample의 입력·정답·모델별 AR 예측을 한 그래프에 표시합니다.
 results = namespace["results"]
 ar_results = namespace["ar_results"]
 test_dataset = namespace["test_dataset"]

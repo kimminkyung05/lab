@@ -1,0 +1,18 @@
+# Notebook runtime
+jupyter
+ipython
+
+# Data and visualization
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+statsmodels
+scikit-learn
+joblib
+
+# Training and optimization
+torch
+optuna
+numba
