@@ -2,6 +2,11 @@
 
 해양 운동 시계열 예측과 자유 자기회귀(AR) 평가를 위한 Jupyter Notebook 프로젝트입니다.
 
+## 데이터베이스
+본 프로젝트에서는 아래 링크의 데이터를 사용합니다.
+- [lrf-sswu Repository](https://github.com/yangjunahn/lrf-sswu/tree/main)
+
+
 ## 실행
 
 `00_experiment_runner.ipynb`만 처음부터 실행합니다.
